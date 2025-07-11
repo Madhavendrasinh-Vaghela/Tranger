@@ -1,0 +1,20 @@
+<% layout('layouts/bolierplate') %>
+
+<h2>All Listings</h2>
+
+<form method="GET" action="/listings/new">
+  <button>Create New</button>
+</form>
+
+<div class="grid">
+  <% allListings.forEach(listing => { %>
+    <div class="card">
+      <h3><%= listing.title %></h3>
+<img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="listing-img" />
+      <p><%= listing.description %></p>
+      <p class="price">₹<%= listing.price.toLocaleString("en-IN") %></p>
+      <p><strong>Location:</strong> <%= listing.location %>, <%= listing.country %></p>
+      <a href="/listings/<%= listing._id %>" class="button-link">View Details</a>
+    </div>
+  <% }) %>
+</div>

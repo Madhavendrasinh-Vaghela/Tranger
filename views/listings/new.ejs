@@ -1,0 +1,69 @@
+<% layout("layouts/bolierplate") %>
+
+<div class="container">
+  <div class="edit-header">
+    <h2 class="page-title">Create New Listing</h2>
+  </div>
+
+  <div class="edit-card">
+    <form class="edit-form needs-validation" action="/listings" method="POST" novalidate>
+      
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="listing[title]" placeholder="Enter listing title" required />
+        <div class="invalid-feedback">Please provide a title.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input type="text" id="image" name="listing[image][url]" placeholder="Paste image URL here" required />
+        <div class="invalid-feedback">Please provide a valid image URL.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="listing[description]" placeholder="Write a description..." required></textarea>
+        <div class="invalid-feedback">Please provide a description.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" name="listing[price]" placeholder="Enter price (optional)" required />
+        <div class="invalid-feedback">Please provide a valid price.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="listing[location]" placeholder="City or area" required />
+        <div class="invalid-feedback">Please provide a location.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" id="country" name="listing[country]" placeholder="Country name" required />
+        <div class="invalid-feedback">Please provide a country name.</div>
+      </div>
+
+      <div class="form-actions">
+        <button class="edit-button" type="submit">Create Listing</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add this script at the bottom of your layout or new.ejs -->
+<script>
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>

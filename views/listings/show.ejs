@@ -1,0 +1,56 @@
+<% layout("layouts/bolierplate") %>
+
+<div class="container">
+  <div class="listing-header">
+    <h2 class="page-title">Listing Details</h2>
+    <a href="/listings" class="back-link">← Back to Listings</a>
+  </div>
+  
+  <div class="listing-detail-card">
+    <div class="listing-image-container">
+  <% if (typeof listing.image === "string" && listing.image.trim() !== "") { %>
+  <img src="<%= listing.image %>" alt="<%= listing.title %>" class="listing-image" />
+<% } else { %>
+  <div class="no-image-placeholder">
+    <span>📷 No Image Available</span>
+  </div>
+<% } %>
+
+    </div>
+    
+    <div class="listing-content">
+      <h3 class="listing-title"><%= listing.title %></h3>
+      
+      <div class="listing-info">
+        <div class="info-item">
+          <span class="info-label">Description:</span>
+          <p class="info-value"><%= listing.description %></p>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Price:</span>
+          <p class="info-value price-highlight">₹<%= listing.price.toLocaleString("en-IN") %></p>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Location:</span>
+          <p class="info-value">📍 <%= listing.location %>, <%= listing.country %></p>
+        </div>
+      </div>
+      
+      <div class="listing-actions">
+  <a href="/listings/<%= listing._id %>/edit" class="action-button edit-button">
+    ✏️ Edit Listing
+  </a>
+
+  <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" 
+        onsubmit="return confirm('Are you sure you want to delete this listing?');" 
+        class="delete-form">
+    <button type="submit" class="action-button delete-button">
+      🗑️ Delete Listing
+    </button>
+  </form>
+</div>
+    </div>
+  </div>
+</div>
